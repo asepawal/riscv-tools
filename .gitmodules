@@ -13,3 +13,9 @@
 [submodule "riscv-openocd"]
 	path = riscv-openocd
 	url = https://github.com/riscv/riscv-openocd.git
+[submodule "riscv-gnu-toolchain"]
+	path = riscv-gnu-toolchain
+	url = https://github.com/riscv/riscv-gnu-toolchain.git
+[submodule "segregator-tests"]
+	path = segregator-tests
+	url = https://github.com/asepawal/segregator-tests.git
