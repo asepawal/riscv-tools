@@ -19,17 +19,23 @@ check_version() {
 check_version automake 1.14 "OpenOCD build"
 check_version autoconf 2.64 "OpenOCD build"
 
+if [ "${RISCV_XLEN}" = "32" ]
+then
+    RISCV_GNU_FLAGS="--with-arch=rv32ima --with-abi=ilp32"
+    RISCV_ISA_SIM_FLAGS="--with-isa=rv32ima"
+fi
+
 cd riscv-opcodes
 make
 cd -
 
 #build_project riscv-openocd --prefix=$RISCV --enable-remote-bitbang --enable-jtag_vpi --disable-werror
 
-build_project riscv-isa-sim --prefix=$RISCV --enable-histogram
+build_project riscv-isa-sim --prefix=$RISCV ${RISCV_ISA_SIM_FLAGS} --enable-histogram
 
-build_project riscv-gnu-toolchain --prefix=$RISCV 
+build_project riscv-gnu-toolchain --prefix=$RISCV ${RISCV_GNU_FLAGS}
 
-CC= CXX= build_project riscv-pk --prefix=$RISCV --host=riscv64-unknown-elf
+CC= CXX= build_project riscv-pk --prefix=$RISCV --host=riscv${RISCV_XLEN}-unknown-elf
 
 #build_project riscv-tests --prefix=$RISCV/riscv64-unknown-elf
 

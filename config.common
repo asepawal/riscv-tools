@@ -1,3 +1,4 @@
 RISCV_KERNEL=pk
 #RISCV_KERNEL=freertos
 
+RISCV_XLEN=32
